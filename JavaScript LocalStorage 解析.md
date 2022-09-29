@@ -1,3 +1,4 @@
+持续创作，加速成长！这是我参与「掘金日新计划 · 10 月更文挑战」的第 1 天，[点击查看活动详情](https://juejin.cn/post/7147654075599978532)
 
 # JavaScript LocalStorage 解析
 
@@ -150,5 +151,17 @@ localStorage.clear();
 
 ## 开始编码吧
 
-```index.html``` 文件中包含 Web 应用程序的 HTML 标签。
+```index.html``` 文件中包含 Web 应用程序的 HTML 标签。HTML 代码中包含一个带有按钮和输入字段的表单。
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    
+  </head>
+  <body></body>
+</html>
+```
+
+
 
