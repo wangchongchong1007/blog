@@ -1,5 +1,3 @@
-持续创作，加速成长！这是我参与「掘金日新计划 · 10 月更文挑战」的第 1 天，[点击查看活动详情](https://juejin.cn/post/7147654075599978532)
-
 # JavaScript LocalStorage 解析
 
 在互联网早期，你需要一台服务器存储数据。但是现在，通过 LocalStorage 就可以将数据存储在浏览器和应用程序上，无需与后端服务器通信。
@@ -157,11 +155,111 @@ localStorage.clear();
 <!DOCTYPE html>
 <html>
   <head>
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Local Storage</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body></body>
+  <body>
+    <div id="form">
+      <form id="userForm">
+        <h1>LocalStorage Application</h1>
+        <label for="userName">User</label>
+        <input type="text" id="userName" placeholder="Enter user name" required autofocus />
+        <br/>
+        <label for="age">Age</label>
+        <input type="number" id="age" placeholder="Enter user age" required />
+        <br/>
+        <label for="key">Key</label>
+        <input type="text" id="key" placeholder="Enter key" required />
+        <br/>
+
+        <button type="submit">Save User</button>
+      </form>
+      <br/>
+
+      <label for="retrieveKey">Enter Key to retrieve user</label>
+      <input type="text" id="retrieveKey" placeholder="Enter key to access user" required />
+      <br/>
+      <button id="retrieveButton">Retrieve User</button>
+      <br/>
+
+      <div id="userData"></div>
+      <br/>
+
+      <label for="removeKey">Enter Key to delete user</label>
+      <input type="text" id="removeKey" placeholder="remove key" required />
+      <br/>
+      <button id="removeButton">Delete User</button>
+      <br/>
+
+      <button id="clearButton">Delete all users</button>
+    </div>
+    <script type="text/javascript" scr="main.js"></script>
+  </body>
 </html>
 ```
 
+这里是样式代码：
 
+```css
+/* 基础样式 */
+html {
+  font-size: 67.5%;
+}
+body {
+  font-size: 1.6rem;
+  padding: 0;
+  margin: 0;
+}
 
+/* form */
+#form {
+  margin-left: 2rem;
+}
+```
+
+```main.js``` 主要包含从 LocalStorage 中进行数据存储，获取以及删除的所有函数。
+
+```js
+// 往 LocalStorage 中存储用户数据
+function store() {
+  let userName = document.getElementById('userName').value;
+  let age = document.getElementById('age').value;
+  let key = document.getElementById('key').value;
+
+  const user = { userName, age };
+
+  localStorage.setItem(key, JSON.stringify(user));
+}
+
+// 从 LocalStorage 中获取用户数据
+function retrieveUserData() {
+  var key = document.getElementById('retrieveKey').value;
+  let userData = localStorage.getItem(key);
+
+  let paragraph = document.createElement('p');
+  let info = document.createTextNode(userData);
+  paragraph.appendChild(info);
+  let element = document.getElementById('userData');
+  element.appendChild(paragraph);
+  key.value = '';
+}
+
+// 从 LocalStorage 中删除用户数据
+function removeUserData() {
+  var removeKey = document.getElementById('removeKey').value;
+  localStorage.removeItem(removeKey);
+  removeKey.value = '';
+}
+
+// 从 LocalStorage 中删除所有用户数据
+function deleteAllUserData() {
+  localStorage.clear();
+}
+```
+
+# 关于 LocalStorage 的一些要点
+
+- LocalStorage 没有数据保护，存储敏感数据并不安全，因为任何人都可以访问。
+- LocalStorage 最多只能在浏览器中存储 5MB 的数据。
